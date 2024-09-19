@@ -1,0 +1,32 @@
+<main>
+     <div class="container">
+         <br>
+         <h2>Sign Up</h2>
+         <hr>
+         <div class="column">
+             <form  class="addbiz" action="/adduser" method="post">
+                <div class="input">
+                    <p class="">First Name</p>
+                    <input required type="text" name="fname" class="">
+                </div>
+                <div class="input">
+                    <p class="">Last Name</p>
+                    <input required type="text" name="lname" class="">
+                </div>
+                <div class="input">
+                    <p class="">Preferred Username</p>
+                    <input type="text" required name="username" placeholder="A display name on your dashboard and previews">
+                </div>
+                <div class="input">
+                    <p class="">Email</p>
+                    <input type="email" name="email" class="" required>
+                </div>
+                <div class="input">
+                    <p class="">Password</p>
+                    <input type="password" name="password" class="" required>
+                </div>
+                <button class="btn btn-outline-success" type="submit" style="color: var(--s-primary);font-weight: bold;border-color: #876607;font-size: 17px;background: white;padding: 5px 40px; margin-left:5px;">Submit</button>
+             </form>
+         </div>
+     </div>
+</main>

@@ -1,0 +1,183 @@
+<main>
+     <div class="container">
+         <br>
+         <h2>Add your business.</h2>
+         <hr>
+         <div class="column">
+             <form id="addbusiness" class="addbiz" action="/addbusiness" method="post"  enctype="multipart/form-data" onsubmit="formsub();">
+                <div class="input">
+                    <p class="">Business Name</p>
+                    <input id="business_name" required type="text" name="business_name" class="">
+                </div>
+                <div class="input">
+                    <p class="">Category</p>
+                    <input id="category" type="number" required name="category" style="height: 0px;border:none;">
+                    <p id="catinput" class="input_option_container"></p>
+                </div>
+                <div class="input">
+                    <p class="">Location</p>
+                    <input id="address" type="text" required name="address" placeholder="Type in well formatted address">
+                    <i style="font-size:0.7em">Help your customers to find you by map?  <i>Drag your location to the center (i.e. under the marker) and enable "Use Map".</i></i>
+                </div>
+                <div id="map" style="width: 100%; height: 400px;    margin: 15px 0px;">
+                   
+                </div>
+                <p id="mapToggle" class="btn btn-primary" onclick="toggleMap()"> Use Map: Disabled </p>
+                <input type="hidden" id="longitude" name="longitude">
+                <input type="hidden" id="latitude" name="latitude">
+
+                <div class="input">
+                    <p class="">Telephone No 1</p>
+                    <input id="tel_1" type="text" name="tel_1" class="" required>
+                </div>
+                <div class="input">
+                    <p class="">Telephone No 2</p>
+                    <input id="tel_2" type="text" name="tel_2" class="">
+                </div>
+                <div class="input">
+                    <p class="">Description</p>
+                    <input id="description" type="textarea" name="description" class="" required>
+                </div>
+                <div class="input">
+                    <p class="">Product Keywords </p>
+                    <input id="products" type="textarea" name="products" class="" placeholder="garri, beans, tv, television" required>
+                </div>
+                
+                <div class="input">
+                    <p class="">Open Hours </p>
+                    <input id="openhours" type="hidden" name="openhours" class="" placeholder="garri, beans, tv, television" required>
+                    <table>
+                        <tr>
+                            <th>Day</th>
+                            <th>Open</th>
+                            <th>Close</th>
+                        </tr>
+                        <tr>
+                            <td>Monday</td>
+                            <td><input type="text" name="monday_open" value="8am"></td>
+                            <td><input type="text" name="monday_close" value="4pm"></td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td><input type="text" name="tuesday_open" value="8am"></td>
+                            <td><input type="text" name="tuesday_close" value="4pm"></td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td><input type="text" name="wednesday_open" value="8am"></td>
+                            <td><input type="text" name="wednesday_close" value="4pm"></td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td><input type="text" name="thursday_open" value="8am"></td>
+                            <td><input type="text" name="thursday_close" value="4pm"></td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td><input type="text" name="friday_open" value="8am"></td>
+                            <td><input type="text" name="friday_close" value="4pm"></td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td><input type="text" name="saturday_open" value="8am"></td>
+                            <td><input type="text" name="saturday_close" value="4pm"></td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td><input type="text" name="sunday_open" value="-"></td>
+                            <td><input type="text" name="sunday_close" value="-"></td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="input">
+                    <p class="">Image for your business </p>
+                    <input id="image" type="file" name="imag">
+                </div>
+                <input id="id" type="hidden" name="id" value="">
+                <button class="btn btn-outline-success" type="submit" style="color: var(--s-primary);font-weight: bold;border-color: #876607;font-size: 17px;background: white;padding: 5px 40px; margin-left:5px;">Submit</button>
+             </form>
+             <script>
+                 let cat = document.getElementById('category');
+                 function formsub() {
+                     let s = ','; let hs = '/';
+                     let openhours = document.getElementsByName('monday_open')[0].value + hs + document.getElementsByName('monday_close')[0].value + s + 
+document.getElementsByName('tuesday_open')[0].value + hs + document.getElementsByName('tuesday_close')[0].value + s + document.getElementsByName('wednesday_open')[0].value + hs + document.getElementsByName('wednesday_close')[0].value + s + document.getElementsByName('thursday_open')[0].value + hs + document.getElementsByName('thursday_close')[0].value + s + document.getElementsByName('friday_open')[0].value + hs + document.getElementsByName('friday_close')[0].value + s + document.getElementsByName('saturday_open')[0].value + hs + document.getElementsByName('saturday_close')[0].value + s + document.getElementsByName('sunday_open')[0].value + hs + document.getElementsByName('sunday_close')[0].value;
+                    document.getElementById('openhours').value = openhours;
+                    return true;
+
+                 }
+             </script>
+
+              <script>
+                usemap = false;
+                mapboxgl.accessToken = 'pk.eyJ1Ijoic2thaGxvIiwiYSI6ImNsengzbHk0azBwdzYya3NkNHhkZ3c4M2QifQ.eYQdSw4mca4z9dloA7cyiQ';
+                const map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v9',
+                    projection: 'globe', // Display the map as a globe, since satellite-v9 defaults to Mercator
+                    zoom: 9,
+                    minZoom: 9,
+                    center: [5.283333, 7.166667],
+                    maxBounds: [[4.363728503109807, 5.859574406653049],[6.077595691267174, 7.763067784120254]]
+                });
+
+                map.addControl(new mapboxgl.NavigationControl());
+                map.scrollZoom.disable();
+
+                //map.on('style.load', () => {
+                    //map.setFog({}); // Set the default atmosphere style
+                //});
+
+                let userInteracting = false;
+
+                // Pause spinning on interaction
+                map.on('mousedown', () => {
+                    userInteracting = true;
+                });
+                map.on('dragstart', () => {
+                    userInteracting = true;
+                });
+                
+                marker = new mapboxgl.Marker();
+                marker.setLngLat([5.283333, 7.166667]);
+                marker.addTo(map);
+                // When animation is complete, start spinning if there is no ongoing interaction
+                map.on('move', () => {
+                    marker.setLngLat(map.getCenter());
+                });
+
+                cord = [0,0];
+                map.on('dragend', () => {
+                    if (usemap) {
+                        cord = marker.getLngLat();
+                        document.getElementById('longitude').value = cord.lng;
+                        document.getElementById('latitude').value = cord.lat;
+                    }
+
+                });
+
+                document.getElementById('map').style.display = "none";
+                //marker.remove();
+
+                function toggleMap() {
+                    if (usemap) {
+                        usemap = false;
+                        document.getElementById('longitude').value = null;
+                        document.getElementById('latitude').value = null;
+                        document.getElementById('mapToggle').innerHTML = "Use Map: Disabled, Click to Change";
+                        document.getElementById('map').style.display = "none";
+                    } else {
+                        usemap = true;
+                        cord = marker.getLngLat();
+                        document.getElementById('longitude').value = cord.lng;
+                        document.getElementById('latitude').value = cord.lat;
+                        document.getElementById('mapToggle').innerHTML = "Use Map: Enabled, Click to Change";
+                        document.getElementById('map').style.display = "block";
+                    }
+                }
+          </script>
+      
+         </div>
+     </div>
+</main>
